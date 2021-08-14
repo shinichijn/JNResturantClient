@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "projects": {
+    "eresturant": {
+      "projectType": "application",
+      "root": "apps/eresturant",
+      "sourceRoot": "apps/eresturant/src",
+      "prefix": "jnresturant",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/eresturant",
+            "index": "apps/eresturant/src/index.html",
+            "main": "apps/eresturant/src/main.ts",
+            "polyfills": "apps/eresturant/src/polyfills.ts",
+            "tsConfig": "apps/eresturant/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/eresturant/src/favicon.ico",
+              "apps/eresturant/src/assets"
+            ],
+            "styles": ["apps/eresturant/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/eresturant/src/environments/environment.ts",
+                  "with": "apps/eresturant/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "eresturant:build:production"
+            },
+            "development": {
+              "browserTarget": "eresturant:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "eresturant:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/eresturant/src/**/*.ts",
+              "apps/eresturant/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/eresturant"],
+          "options": {
+            "jestConfig": "apps/eresturant/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "eresturant-e2e": {
+      "root": "apps/eresturant-e2e",
+      "sourceRoot": "apps/eresturant-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/eresturant-e2e/cypress.json",
+            "tsConfig": "apps/eresturant-e2e/tsconfig.e2e.json",
+            "devServerTarget": "eresturant:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "eresturant:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/eresturant-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "defaultProject": "eresturant"
+}
