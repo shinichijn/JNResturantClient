@@ -14,7 +14,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@jnresturant/orders": ["libs/orders/src/index.ts"],
+      "@jnresturant/products": ["libs/products/src/index.ts"],
+      "@jnresturant/ui": ["libs/ui/src/index.ts"],
+      "@jnresturant/users": ["libs/users/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
